@@ -1101,7 +1101,7 @@ ssize_t LiveSession::readFromSource(CFContext * cfc, uint8_t * data, size_t size
             return UNKNOWN_ERROR;
         }
         if (read_seek_size && read_seek_left_size) {
-            int32_t tmp_size = read_seek_left_size > sizeof(dummy) ? sizeof(dummy) : read_seek_left_size;
+            int32_t tmp_size = read_seek_left_size > (int64_t)sizeof(dummy) ? sizeof(dummy) : read_seek_left_size;
             ret = curl_fetch_read(cfc, dummy, tmp_size);
             if (ret > 0) {
                 read_seek_left_size -= ret;
