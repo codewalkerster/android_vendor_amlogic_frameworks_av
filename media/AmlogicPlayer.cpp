@@ -14,7 +14,7 @@
 ** limitations under the License.
 */
 
-#define LOG_NDEBUG 0
+#define LOG_NDEBUG 1
 #define LOG_TAG "AmlogicPlayer"
 #include "utils/Log.h"
 #include <stdio.h>
@@ -3160,7 +3160,7 @@ status_t    AmlogicPlayer::getParameter(int key, Parcel *reply)
 status_t AmlogicPlayer::getCurrentPosition(int* position)
 {
     //LOGV("getCurrentPosition\n");
-    LOGI(" getCurrentPosition Player time=%dms\n", (int)(ALooper::GetNowUs() - PlayerStartTimeUS) / 1000);
+    //LOGI(" getCurrentPosition Player time=%dms\n", (int)(ALooper::GetNowUs() - PlayerStartTimeUS) / 1000);
     Mutex::Autolock autoLock(mMutex);
 
     if (fastNotifyMode) {
@@ -3203,8 +3203,8 @@ status_t AmlogicPlayer::getCurrentPosition(int* position)
             }
             #endif
             realposition = mPlayTime + (int64_t)(ALooper::GetNowUs() - mLastPlayTimeUpdateUS) / 1000;
-            LOGI(" getCurrentPosition mPlayTime=%d,mLastPlayTimeUpdateUS=%lld*1000,GetNowUs()=%lld*1000,realposition=%lld\n",
-                 mPlayTime, mLastPlayTimeUpdateUS / 1000, ALooper::GetNowUs() / 1000, realposition);
+            //LOGI(" getCurrentPosition mPlayTime=%d,mLastPlayTimeUpdateUS=%lld*1000,GetNowUs()=%lld*1000,realposition=%lld\n",
+            //     mPlayTime, mLastPlayTimeUpdateUS / 1000, ALooper::GetNowUs() / 1000, realposition);
             *position = realposition;
         } else {
             //*position=((mPlayTime+500)/1000)*1000;
