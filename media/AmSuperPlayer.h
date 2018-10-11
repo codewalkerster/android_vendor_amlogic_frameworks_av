@@ -141,6 +141,7 @@ private:
 public:
 	static AmlogicPlayer* getAmlogicPlayer();
 	static void setAmlogicPlayer(AmlogicPlayer* player);
+	static void clearAmlogicPlayer(AmlogicPlayer* player);
 };
 	
 }; // namespace android
