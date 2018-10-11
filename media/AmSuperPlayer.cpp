@@ -361,6 +361,7 @@ status_t    AmSuperPlayer::release()
 	
 	TRACE();
 	if (mPlayer == NULL) return NO_ERROR;
+	AmSuperPlayer::clearAmlogicPlayer(static_cast<AmlogicPlayer*>(mPlayer.get()));
 	mPlayer.clear();
 	if(NULL!=mHardPara){
 		free((void*)mHardPara);
@@ -968,6 +969,7 @@ int AmSuperPlayer::initThread()
 	if (isRestartCreate == true) {
 		stop();
 		if (mPlayer == NULL) return NO_ERROR;
+		AmSuperPlayer::clearAmlogicPlayer(static_cast<AmlogicPlayer*>(mPlayer.get()));
 		mPlayer.clear();
 		if(NULL!=mHardPara){
 			free((void*)mHardPara);
@@ -1043,6 +1045,13 @@ void AmSuperPlayer::setAmlogicPlayer(AmlogicPlayer* player)
 	}
 
 	mSingleAmlogicPlayer = player;
+}
+
+void AmSuperPlayer::clearAmlogicPlayer(AmlogicPlayer* player)
+{
+	if (player == mSingleAmlogicPlayer.get()) {
+		mSingleAmlogicPlayer.clear();
+	}
 }
 
 }
