@@ -28,8 +28,6 @@
 
 #include "am_media_private.h"
 
-#include "AmlogicPlayer.h"
-
 namespace android {
 
 struct ISurfaceTexture;
@@ -134,12 +132,6 @@ private:
 	int isStartedPrepared;
 	int mRequestPrepared;
 	int mPrepareErr;
-
-	static sp<AmlogicPlayer>	mSingleAmlogicPlayer;
-
-public:
-	static AmlogicPlayer* getAmlogicPlayer();
-	static void setAmlogicPlayer(AmlogicPlayer* player);
 };
 	
 }; // namespace android

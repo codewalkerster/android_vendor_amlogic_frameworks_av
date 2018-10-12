@@ -64,8 +64,6 @@ namespace android {
 	static status_t STATE_ERROR = 1;
 	static status_t STATE_OPEN = 2;
 
-	sp<AmlogicPlayer> AmSuperPlayer::mSingleAmlogicPlayer;
-
 #define  TRACE()	LOGV("[%s::%d]\n",__FUNCTION__,__LINE__)
 //#define  TRACE()	
 #define IS_LOCAL_HTTP(uri) (uri && (strcasestr(uri,"://127.0.0.1") || strcasestr(uri,"://localhost")))
@@ -815,9 +813,7 @@ static sp<MediaPlayerBase> createPlayer(player_type playerType, void* cookie,
 			#else
 			LOGV("Have not Buildin Amlogic Player Support");
 			#endif
-
-			AmSuperPlayer::setAmlogicPlayer(static_cast<AmlogicPlayer*>(p.get()));
-
+			
             break;	
     }
     if (p != NULL) {
@@ -1029,21 +1025,6 @@ status_t AmSuperPlayer::dump(int fd, const Vector<String16> &args) const
 	return mPlayer->dump(fd, args);
 }
 
-AmlogicPlayer* AmSuperPlayer::getAmlogicPlayer()
-{
-	return mSingleAmlogicPlayer.get();
-}
-
-void AmSuperPlayer::setAmlogicPlayer(AmlogicPlayer* player)
-{
-	if (mSingleAmlogicPlayer.get()) {
-		mSingleAmlogicPlayer->pause();
-		mSingleAmlogicPlayer->release();
-		mSingleAmlogicPlayer.clear();
-	}
-
-	mSingleAmlogicPlayer = player;
-}
 
 }
 
