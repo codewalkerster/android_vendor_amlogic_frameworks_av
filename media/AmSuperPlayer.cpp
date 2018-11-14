@@ -64,7 +64,7 @@ namespace android {
 	static status_t STATE_ERROR = 1;
 	static status_t STATE_OPEN = 2;
 
-	sp<AmlogicPlayer> AmSuperPlayer::mSingleAmlogicPlayer;
+	AmlogicPlayer* AmSuperPlayer::mSingleAmlogicPlayer = NULL;
 
 #define  TRACE()	LOGV("[%s::%d]\n",__FUNCTION__,__LINE__)
 //#define  TRACE()	
@@ -1012,15 +1012,17 @@ status_t AmSuperPlayer::dump(int fd, const Vector<String16> &args) const
 
 AmlogicPlayer* AmSuperPlayer::getAmlogicPlayer()
 {
-	return mSingleAmlogicPlayer.get();
+	return mSingleAmlogicPlayer;
 }
 
 void AmSuperPlayer::setAmlogicPlayer(AmlogicPlayer* player)
 {
-	if (mSingleAmlogicPlayer.get()) {
-		mSingleAmlogicPlayer->pause();
-		mSingleAmlogicPlayer->release();
-		mSingleAmlogicPlayer.clear();
+	if (mSingleAmlogicPlayer != NULL) {
+		if (mSingleAmlogicPlayer->hasVideo()) {
+			mSingleAmlogicPlayer->pause();
+			mSingleAmlogicPlayer->release();
+			mSingleAmlogicPlayer = NULL;
+		}
 	}
 
 	mSingleAmlogicPlayer = player;
@@ -1028,8 +1030,10 @@ void AmSuperPlayer::setAmlogicPlayer(AmlogicPlayer* player)
 
 void AmSuperPlayer::clearAmlogicPlayer(AmlogicPlayer* player)
 {
-	if (player == mSingleAmlogicPlayer.get()) {
-		mSingleAmlogicPlayer.clear();
+	if (player == mSingleAmlogicPlayer) {
+		if (mSingleAmlogicPlayer->hasVideo()) {
+			mSingleAmlogicPlayer = NULL;
+		}
 	}
 }
 

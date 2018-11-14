@@ -124,7 +124,7 @@ public:
     virtual status_t dump(int fd, const Vector<String16> &args) const;
     size_t countTracks() const;
     int match_name(const char *name,const char *machsetting);
-
+    bool hasVideo() { return mhasVideo; }
 
 private:
     status_t    setdatasource(const char *path, int fd, int64_t offset, int64_t length, const KeyedVector<String8, String8> *headers);
