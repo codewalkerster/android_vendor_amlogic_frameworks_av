@@ -549,7 +549,7 @@ status_t AmLiveSession::dequeueAccessUnit(
             }
 
             if (mDebugHandle) {
-                fprintf(mDebugHandle, "%s : read buffer at time (%" PRId64 ")us, origin time (%" PRId64 ")us, first time (%" PRId64 ")us, seek time (%" PRId64 ")us, offset time (%" PRId64 ")us\n", streamStr, timeUs, origin_timeUs, firstTimeUs, mLastSeekTimeUs, offset_timeUs);
+                fprintf(mDebugHandle, "%s : read buffer at time (%lld)us, origin time (%lld)us, first time (%lld)us, seek time (%lld)us, offset time (%lld)us\n", streamStr, timeUs, origin_timeUs, firstTimeUs, mLastSeekTimeUs, offset_timeUs);
             }
             ALOGV("[%s] read buffer at time %" PRId64 " us", streamStr, timeUs);
 
