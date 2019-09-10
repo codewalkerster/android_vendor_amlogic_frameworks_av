@@ -135,7 +135,7 @@ private:
 	int mRequestPrepared;
 	int mPrepareErr;
 
-	static AmlogicPlayer*	mSingleAmlogicPlayer;
+	static sp<AmlogicPlayer>	mSingleAmlogicPlayer;
 
 public:
 	static AmlogicPlayer* getAmlogicPlayer();

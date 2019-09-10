@@ -126,7 +126,6 @@ public:
     int match_name(const char *name,const char *machsetting);
     virtual status_t    setPlaybackSettings(const AudioPlaybackRate& rate);
     virtual status_t        getPlaybackSettings(AudioPlaybackRate* rate /* nonnull */);
-    bool hasVideo() { return mhasVideo; }
 
 private:
     status_t    setdatasource(const char *path, int fd, int64_t offset, int64_t length, const KeyedVector<String8, String8> *headers);
